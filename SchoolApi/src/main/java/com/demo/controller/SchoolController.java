@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/School")
 public class SchoolController {
@@ -25,6 +27,16 @@ public class SchoolController {
             return ResponseEntity.ok(entity);
         }else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/findAllStudent")
+    public ResponseEntity<?> findAllStudents(){
+        List<SchoolEntity> students = service.findAll();
+        if(students.isEmpty()){
+            return ResponseEntity.ok("There is no data available.");
+        }else{
+            return ResponseEntity.ok(students);
         }
     }
 
@@ -72,5 +84,12 @@ public class SchoolController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/students/count")
+    public ResponseEntity<Long> countStudents() {
+        long count = service.countStudents();
+        return ResponseEntity.ok(count);
+    }
+
 
 }

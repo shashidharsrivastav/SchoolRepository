@@ -5,6 +5,8 @@ import com.demo.repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SchoolService {
     @Autowired
@@ -20,5 +22,13 @@ public class SchoolService {
 
     public void deleteById(Long rollNumber) {
         repository.deleteById(rollNumber);
+    }
+
+    public List<SchoolEntity> findAll() {
+        return repository.findAll();
+    }
+
+    public long countStudents() {
+        return repository.count();
     }
 }
